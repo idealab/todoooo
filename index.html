@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Todoooo</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<form class="form-horizontal note-edit-form" role="form">
+    <input type="text" class="form-control" placeholder="Title" required autofocus>
+    <textarea class="form-control" placeholder="Note"></textarea>
+</form>
+
+<section id="todoapp">
+    <section id="main">
+        <div class="container-fluid">
+            <div id="todo-list" class="row">
+
+            </div>
+        </div>
+    </section>
+</section>
+
+<script type="text/template" id="item-template">
+    <div class="col-md-3 note-box">
+        <div class="panel panel-success" role="form">
+            <div class="panel-heading panel-title note-box-title"> <%= title %></div>
+            <div class="panel-body note-box-content"><%= content %></div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/backbone.js"></script>
+<script type="text/javascript" src="js/backbone.localStorage.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
