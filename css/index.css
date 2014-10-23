@@ -1,6 +1,12 @@
 /**
 * The main style definition
 **/
+body {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #eeeeee;
+    font-family: 'Microsoft Yahei', "Helvetica Neue", Helvetica, Arial;
+}
 
 /**
 * ======= Note box ======
@@ -23,10 +29,13 @@
 **/
 
 .note-edit-form {
-    max-width: 600px;
-    padding: 0px 15px;
-    margin: 0 auto;
-    border: 1px solid #AAAAAA;
+    max-width: 500px;
+    padding: 15px 15px 10px;
+    margin: 0 auto 40px;
+    text-align: left;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-shadow: 2px 2px 3px #aaaaaa;
 }
 
 .note-edit-form .form-control {
@@ -35,9 +44,23 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 10px;
-    margin-top: 10px;
+    margin: 0px auto;
+    padding: 5px;
+}
+
+.note-edit-form .note-title {
     font-size: 16px;
+    margin-bottom: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.note-edit-form .note-content {
+    min-height: 78px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .note-edit-form .form-control:focus {
@@ -55,4 +78,35 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     max-height: 80px;
+}
+
+.note-edit-form .btn-save-note {
+    display: block;
+    margin: 10px auto;
+}
+
+/***
+* ============== the note show box style ================
+***/
+.note-showbox-title {
+    padding: 5px 10px;
+}
+
+.note-showbox-title h5 {
+    margin: 0px;
+    color: #7BBE7C;
+}
+
+.note-showbox-footer {
+    font-size: 0.8em;
+    text-align: right;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: #fafafa;
+    color: #777777;
+}
+
+.note-showbox-footer span {
+    border-bottom: 1px dotted #777777;
+    font-style: italic;
 }

@@ -4,23 +4,46 @@
 
 (function () {
 
-    var app = app || {};
-    app.Todooo = Backbone.Model.extend({
-        title: 'empty title...',
-        content: 'empty content...',
-        completed: false
+//    var app = app || {};    // namespace definition
+
+    /**
+     * Model definition
+     *
+     * @type {Backbone.Model}
+     */
+    var Todooo = Backbone.Model.extend({
+        defaults: {
+            title: '',
+            content_markdown: '',
+            content_html: '',
+            last_edit: _.now()
+        },
+        initialize: function() {
+
+        }
     });
 
-    var TodoooList = Backbone.Collection.extend({
-        model: app.Todooo,
+    /**
+     * The global model collection definition
+     *
+     * @type {Backbone.Collection}
+     */
+    var TodoooCollection = Backbone.Collection.extend({
+        model: Todooo,
         localStorage: new Backbone.LocalStorage('todooo-storage')
     });
 
-    app.Todooos = new TodoooList();
-    app.TodoooView = Backbone.View.extend({
-        tagName: 'div',
-        template: _.template($('#item-template').html()),
-        initialize: function(){
+    var TodoooBook = new TodoooCollection();
+
+    /**
+     * View definition for the model
+     *
+     * @type {Backbone.View}
+     */
+    var TodoooView = Backbone.View.extend({
+        el: '#note_show_wrapper',
+        template: _.template($('#note_show_wrapper').html()),
+        initialize: function () {
             this.listenTo(this.model, 'change', this.render);
         },
         render: function () {
@@ -29,22 +52,50 @@
         }
     });
 
-    app.AppView = Backbone.View.extend({
-        el: '#todoapp',
+    /**
+     * View definition for the application
+     *
+     * @type {Backbone.View}
+     */
+    var AppView = Backbone.View.extend({
+        el: '#todooo_showbox',
         initialize: function () {
-            this.listenTo(app.Todooos, 'add', this.addOne);
-            app.Todooos.fetch();
+            this.listenTo(TodoooBook, 'add', this.addOne);
+            TodoooBook.fetch();
         },
         addOne: function (todooo) {
-            var view = new app.TodoooView({model: todooo});
+            var view = new TodoooView({model: todooo});
             $('#todo-list').append(view.render().el);
         }
     });
 
-    new app.AppView();
+    new AppView(); // init the application
+//  app.Todooos.create({title: 'From Lei', content: 'Lei: Hello Caicai~', timestamp: '2014-09-05 11:10:22'});
 
-    app.Todooos.create({title: 'From Lei', content: 'Lei: Hello Caicai~', completed: false});
-    app.Todooos.create({title: 'From Cai', content: 'Cai: Waaaao Lei sir!', completed: false});
-    app.Todooos.create({title: 'From Lei', content: 'Lei: Yiiiio Cai Honey!', completed: true});
-    app.Todooos.create({title: 'From Lei', content: 'Lei: Pls do not leave me Cai Honey!', completed: true});
+    // click the note content textarea to resize current edit form
+//    $('#form_note_edit textarea').click(function () {
+//        // TODO: resize the textarea with animation.
+//
+//        $('<button>').attr({
+//            type: 'button',
+//            class: 'btn btn-primary btn-save-note'
+//        }).html('Save').click(function () {
+//            var note_editform = $('#form_note_edit');
+//            var note_title = note_editform.children('input:text').val();
+//            var note_content = note_editform.children('textarea').val();
+//            var curr_date = new Date();
+//            var curr_date_formatted = stringify(curr_date.getFullYear())
+//                + '-' + stringify(curr_date.getMonth())
+//                + '-' + stringify(curr_date.getDate())
+//                + ' ' + stringify(curr_date.getHours())
+//                + ':' + stringify(curr_date.getMinutes())
+//                + ':' + stringify(curr_date.getSeconds());
+//
+//            app.Todooos.create({
+//                title: note_title,
+//                content: note_content,
+//                timestamp: _.now()
+//            });
+//        }).appendTo($('#form_note_edit'));
+//    });
 })();
